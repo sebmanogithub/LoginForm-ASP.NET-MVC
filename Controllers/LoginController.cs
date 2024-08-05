@@ -16,7 +16,7 @@ namespace LoginMVCWebApp.Controllers
             return View("Login");
         }
 
-        public string Login(UserModel userModel)
+        public ActionResult Login(UserModel userModel)
         {
             //return "Results: UserName = " + userModel.UserName + " PW = " + userModel.Password;
             SecurityService securityService = new SecurityService();
@@ -24,11 +24,11 @@ namespace LoginMVCWebApp.Controllers
 
             if (success)
             {
-                return "Success Login";
+                return View("LoginSuccess", userModel);
             }
             else
             {
-                return "Failure. Not logged in.";
+                return View("LoginFailure", userModel);
             }
         }
     }
