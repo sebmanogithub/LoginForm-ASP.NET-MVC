@@ -1,4 +1,5 @@
 ﻿using LoginMVCWebApp.Models;
+using LoginMVCWebApp.Services.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,18 @@ namespace LoginMVCWebApp.Controllers
 
         public string Login(UserModel userModel)
         {
-            return "Results: UserName = " + userModel.UserName + " PW = " + userModel.Password;
+            //return "Results: UserName = " + userModel.UserName + " PW = " + userModel.Password;
+            SecurityService securityService = new SecurityService();
+            Boolean success = securityService.Authenticate(userModel);
+
+            if (success)
+            {
+                return "Success Login";
+            }
+            else
+            {
+                return "Failure. Not logged in.";
+            }
         }
-
-
     }
 }
